@@ -97,9 +97,9 @@ async function validateUserId(req, res, next) {
 
 // validates the body on a request to create a new user
 function validateUser(req, res, next) {
-  if (JSON.stringify(req.body) === "{}") { // check if body is valid
+  if (JSON.stringify(req.body) === "{}") { // check if body has data
     res.status(400).json({ message: 'missing user data' })
-  } else if (!req.body.name) { // checks if name in body is valid
+  } else if (!req.body.name) { // checks if name in body exists
     res.status(400).json({ message: 'missing required name field' })
   } else {
     next()
@@ -107,8 +107,14 @@ function validateUser(req, res, next) {
 }
 
 // validates the body on a request to create a new post
-async function validatePost(req, res, next) {
-
+function validatePost(req, res, next) {
+  if (JSON.stringify(req.body) === "{}") { // check if body has data
+    res.status(400).json({ message: 'missing post data' })
+  } else if (!req.body.text) { // checks if text in post exists
+    res.status(400).json({ message: 'missing required text field' })
+  } else {
+    next()
+  }
 }
 
 module.exports = router
