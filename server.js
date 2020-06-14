@@ -6,6 +6,7 @@ const helmet = require('helmet')
 const server = express()
 
 // global middleware
+server.use(helmet())
 server.use(express.json())
 server.use('/api/users', logger, userRouter)
 
